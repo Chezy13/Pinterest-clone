@@ -1,6 +1,6 @@
 // Выпадающий список выбора доски !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-const btnBoardList = document.querySelector(".header-board__save");
+const btnBoardList = document.querySelector(".header-board__arrow");
 const boardList = document.querySelector(".list");
 
 btnBoardList.addEventListener("click", function(){
@@ -17,15 +17,15 @@ window.addEventListener("click", function(event) {
 
 // Модальное окно для добавления на доску!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-// const btnAddBoard = document.querySelector(".menu-content__add");
-// const board = document.querySelector(".board");
+const btnAddBoard = document.querySelector(".menu-content__add");
+const board = document.querySelector(".board");
 
-// btnAddBoard.addEventListener("click", function(){
-//     board.style.display = "block";
-// })
+btnAddBoard.addEventListener("click", function(){
+    board.style.display = "block";
+})
 
-// window.addEventListener("click", function(event) {
-//     if (event.target === board) {
-//         board.style.display = "none";
-//     }
-// })
+window.addEventListener("click", function(event) {
+    if (event.target === board) {
+        board.style.display = "none";
+    }
+})

@@ -119,7 +119,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   return newRequire;
 })({"scripts/drop-down menu.js":[function(require,module,exports) {
 // Выпадающий список выбора доски !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-var btnBoardList = document.querySelector(".header-board__save");
+var btnBoardList = document.querySelector(".header-board__arrow");
 var boardList = document.querySelector(".list");
 btnBoardList.addEventListener("click", function () {
   boardList.style.display = "block";
@@ -129,16 +129,17 @@ window.addEventListener("click", function (event) {
     boardList.style.display = "none";
   }
 }); // Модальное окно для добавления на доску!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// const btnAddBoard = document.querySelector(".menu-content__add");
-// const board = document.querySelector(".board");
-// btnAddBoard.addEventListener("click", function(){
-//     board.style.display = "block";
-// })
-// window.addEventListener("click", function(event) {
-//     if (event.target === board) {
-//         board.style.display = "none";
-//     }
-// })
+
+var btnAddBoard = document.querySelector(".menu-content__add");
+var board = document.querySelector(".board");
+btnAddBoard.addEventListener("click", function () {
+  board.style.display = "block";
+});
+window.addEventListener("click", function (event) {
+  if (event.target === board) {
+    board.style.display = "none";
+  }
+});
 },{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -167,7 +168,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54429" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64161" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
