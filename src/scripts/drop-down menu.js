@@ -4,15 +4,21 @@ const btnBoardList = document.querySelector(".header-board__arrow");
 const boardList = document.querySelector(".list");
 
 btnBoardList.addEventListener("click", function(){
-    boardList.style.display = "block";
+    boardList.classList.toggle("show");
 })
 
 window.addEventListener("click", function(event) {
     if (event.target === boardList) {
-        boardList.style.display = "none";
+        let dropdowns = document.getElementsByClassName("list");
+        console.log(dropdowns)
+        for (let i = 0; i < dropdowns.length; i++) {
+            let openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
     }
 })
-
 
 
 // Модальное окно для добавления на доску!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -29,3 +35,4 @@ window.addEventListener("click", function(event) {
         board.style.display = "none";
     }
 })
+
