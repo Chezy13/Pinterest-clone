@@ -5,6 +5,7 @@ async function getImg () {
     try {
         const response = await fetch("https://62e0272398dd9c9df60ec690.mockapi.io/usersImages");
         const images = await response.json()
+        console.log(images);
         images.forEach(element => {
             createContentCard(element)
         })
