@@ -5,6 +5,7 @@
 .list {
   display: none;
   @include font;
+
   top: 0;
   left: 0;
   right: 0;
@@ -22,19 +23,16 @@
     right: -180px;
     transform: translate(-50%, -50%);
     background: white;
-
     &__text {
       margin: 10px auto;
       width: 60%;
       text-align: center;
     }
-
     &__btn {
       display: inline-flex;
       flex-direction: column;
       width: 100%;
     }
-
     &__btn button {
       padding: 10px;
       border: none;
