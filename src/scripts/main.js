@@ -156,7 +156,7 @@ function createMenuComplainButton() {
     }
     
     window.onclick = function (event) {
-        if (event.target == complainWindow) {
+        if (event.target === complainWindow) {
             complainWindow.style.display = "none";
         }
     }
