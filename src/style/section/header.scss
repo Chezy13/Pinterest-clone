@@ -1,0 +1,104 @@
+@import "../variables";
+@import "../mixin";
+@import "../fonts";
+
+.header {
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0px;
+    z-index: 70;
+    background: white;
+
+  &-logo {
+    width: 50px;
+    margin-right: 60px;
+    @media (max-width: 870px) {
+      margin-right: 40px;
+    }
+    @media (max-width: 580px) {
+      margin-right: 10px;
+    }
+
+
+    &__logo {
+      max-width: 100%;
+      background-color: #f1eac0;
+      padding: 5px;
+      text-align: center;
+      border-radius: 10px;
+      border: 1px solid gray;
+      font-family: 'Raleway', sans-serif;
+      font-style: normal;
+      font-weight: 700;
+      font-size: $h4;
+      line-height: $lh6;
+      @media (max-width: 800px) {
+        font-size: $h5;
+      }
+      @media (max-width: 600px) {
+        font-size: $h6;
+      }
+    }
+  }
+
+  &-search {
+    width: 70%;
+
+    &__text {
+      width: 100%;
+      background-color: rgb(216, 216, 216);
+      padding: 5px;
+      border-radius: 10px;
+      border: 1px solid rgb(216, 216, 216);
+      outline-color: rgb(85, 218, 248);
+      @include font;
+    }
+  }
+
+  &-board {
+    width: 300px;
+    text-align: center;
+    position: relative;
+    @media (max-width: 500px) {
+      width: 200px;
+      margin-left: 40px;
+    }
+    @media (max-width: 387px) {
+      margin-left: 20px;
+    }
+    @media (max-width: 370px) {
+      margin-left: 40px;
+    }
+    
+
+    &__save {
+      padding-right: 40px;
+      cursor: pointer;
+      border-radius: 10px;
+      border: 1px solid white;
+      background-color: white;
+      @include font;
+      @media (max-width: 430px) {
+        font-size: $h3-768;
+      }
+    }
+
+    &__arrow {
+      height: 18px;
+      position: absolute;
+      bottom: 0%;
+      right: 22%;
+      cursor: pointer;
+      @media (max-width: 800px) {
+        bottom: 0%;
+        right: 16%;
+      }
+      @media (max-width: 500px) {
+        bottom: 16%;
+        right: 16%;
+      }
+    }
+  }
+}

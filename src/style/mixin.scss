@@ -1,0 +1,14 @@
+@import "variables";
+
+* {
+  margin: 0 auto;
+
+}
+
+@mixin font {
+  font-family: 'Raleway', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: $h5;
+  line-height: $lh10;
+}

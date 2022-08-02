@@ -1,0 +1,45 @@
+@import "../variables";
+@import "../mixin";
+@import "../fonts";
+
+.board {
+  display: none;
+  position: fixed;
+  z-index: 99;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+  @include font;
+  padding-top: 16%;
+
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 30px;
+    border: 2px solid black;
+    padding: 30px;
+    max-width: 400px;
+
+    &__text {
+      margin-bottom: 15px;
+      width: 60%;
+      text-align: center;
+    }
+    &__btn {
+      display: inline-flex;
+      flex-direction: column;
+    }
+    &__btn button {
+      padding: 10px 30px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      margin: 5px;
+    }
+  }
+}

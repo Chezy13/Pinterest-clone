@@ -1,0 +1,52 @@
+@import "../variables";
+@import "../mixin";
+@import "../fonts";
+
+.list {
+  display: none;
+  @include font;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  position: fixed;
+
+  &-content {
+    width: 320px;
+    border-radius: 30px;
+    border: 1px solid black;
+    padding: 30px;
+    position: absolute;
+    top: 200px;
+    right: -180px;
+    transform: translate(-50%, -50%);
+    background: white;
+
+    &__text {
+      margin: 10px auto;
+      width: 60%;
+      text-align: center;
+    }
+
+    &__btn {
+      display: inline-flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    &__btn button {
+      padding: 10px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      background: #e9e9e9;
+      margin: 5px auto;
+      width: 100%;
+      &:hover {
+        background:  #a5a5a5;
+        color: white;
+      }
+    }
+  }
+}
