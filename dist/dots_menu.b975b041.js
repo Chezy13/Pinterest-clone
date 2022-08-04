@@ -292,11 +292,16 @@ function createMenuHideButton() {
 function createMenuComplainButton() {
   var complainWindow = document.querySelector(".complain");
   var cancelComplain = document.querySelector(".cancel");
+  var complainBtn = document.querySelector(".complain-content__btn-send");
   var menuComplainButton = createElement("button", "menu-content__complain");
   menuComplainButton.innerText = "Пожаловаться";
 
   menuComplainButton.onclick = function () {
     complainWindow.style.display = "block";
+  };
+
+  complainBtn.onclick = function () {
+    complainWindow.style.display = "none";
   };
 
   cancelComplain.onclick = function () {
@@ -359,11 +364,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-<<<<<<< HEAD
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65061" + '/');
-=======
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57624" + '/');
->>>>>>> ba2c8dc63bf2d32896fe72f09a31ae3b510618f2
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50653" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

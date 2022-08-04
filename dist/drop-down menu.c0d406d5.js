@@ -119,7 +119,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   return newRequire;
 })({"scripts/drop-down menu.js":[function(require,module,exports) {
 // Выпадающий список выбора доски !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-var btnBoardList = document.querySelector(".header-board__arrow");
+var btnBoardList = document.querySelector(".header-board__save");
 var boardList = document.querySelector(".list");
 btnBoardList.addEventListener("click", function () {
   boardList.classList.toggle("show");
@@ -138,17 +138,16 @@ window.addEventListener("click", function (event) {
     }
   }
 }); // Модальное окно для добавления на доску!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-var btnAddBoard = document.querySelector(".menu-content__add");
-var board = document.querySelector(".board");
-btnAddBoard.addEventListener("click", function () {
-  board.style.display = "block";
-});
-window.addEventListener("click", function (event) {
-  if (event.target === board) {
-    board.style.display = "none";
-  }
-});
+// const btnAddBoard = document.querySelector(".menu-content__add");
+// const board = document.querySelector(".board");
+// btnAddBoard.addEventListener("click", function(){
+//     board.style.display = "block";
+// })
+// window.addEventListener("click", function(event) {
+//     if (event.target === board) {
+//         board.style.display = "none";
+//     }
+// })
 },{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -177,11 +176,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-<<<<<<< HEAD
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65061" + '/');
-=======
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57624" + '/');
->>>>>>> ba2c8dc63bf2d32896fe72f09a31ae3b510618f2
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50653" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

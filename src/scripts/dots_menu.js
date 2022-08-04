@@ -14,5 +14,6 @@ window.addEventListener("click", (event) => {
         if (!target.closest('.menu-active') && !target.closest('.content-cart__dots--btn')) {
             menu.classList.remove('menu-active')
         }
-    })
+    })  
 })
+
