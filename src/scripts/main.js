@@ -153,12 +153,17 @@ function createMenuHideButton() {
 function createMenuComplainButton() {
     const complainWindow = document.querySelector(".complain");
     const cancelComplain = document.querySelector(".cancel");
+    const complainBtn = document.querySelector(".complain-content__btn-send");
     
     const menuComplainButton = createElement("button", "menu-content__complain")
     menuComplainButton.innerText = "Пожаловаться"
 
     menuComplainButton.onclick = function () {
         complainWindow.style.display = "block";
+    }
+
+    complainBtn.onclick = function () {
+        complainWindow.style.display = "none";
     }
 
     cancelComplain.onclick = function () {

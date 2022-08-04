@@ -23,6 +23,10 @@
     right: -180px;
     transform: translate(-50%, -50%);
     background: white;
+    @media (max-width: 470px) {
+      width: 200px;
+      right: -100px;
+    }
     &__text {
       margin: 10px auto;
       width: 60%;
