@@ -117,13 +117,69 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"scripts/main.js":[function(require,module,exports) {
+})({"scripts/blur_menu.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.createBlurElements = createBlurElements;
+
+var _main = require("./main");
+
+function createBlurElements() {
+  var blurElements = (0, _main.createElement)("div", "content-cart__blur--elements");
+  blurElements.appendChild(createBlurDescr());
+  blurElements.appendChild(createBlurButtonsWrapper());
+  return blurElements;
+}
+
+function createBlurDescr() {
+  var blurDescr = (0, _main.createElement)("div", "content-cart__blur--descr");
+  blurDescr.innerText = "Понятно! Вы больше не увидите этот пин";
+  return blurDescr;
+}
+
+function createBlurButtonsWrapper() {
+  var blurButtonsWrapper = (0, _main.createElement)("div", "content-cart__blur--buttons");
+  blurButtonsWrapper.appendChild(createBlurDeleteBtn());
+  blurButtonsWrapper.appendChild(createBlurCancelBtn());
+  return blurButtonsWrapper;
+}
+
+function createBlurDeleteBtn() {
+  var blurDeleteBtn = (0, _main.createElement)("div", "content-cart__blur--delete");
+  blurDeleteBtn.innerText = "Удалить пин";
+  blurDeleteBtn.addEventListener("click", function (event) {
+    if (event.target === blurDeleteBtn) {
+      event.target.closest(".content-cart").style.display = "none";
+    }
+  });
+  return blurDeleteBtn;
+}
+
+function createBlurCancelBtn() {
+  var blurCancelBtn = (0, _main.createElement)("div", "content-cart__blur--cancel");
+  blurCancelBtn.innerText = "Отмена";
+  blurCancelBtn.addEventListener("click", function (event) {
+    if (event.target === blurCancelBtn) {
+      event.target.closest(".content-cart__blur--elements").nextElementSibling.classList.remove("blur");
+      event.target.closest(".content-cart__wrapper").lastElementChild.classList.remove("blur");
+      event.target.closest(".content-cart__blur--elements").classList.remove("active");
+    }
+  });
+  return blurCancelBtn;
+}
+},{"./main":"scripts/main.js"}],"scripts/main.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.contentSection = void 0;
+exports.createElement = createElement;
+
+var _blur_menu = require("./blur_menu");
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
@@ -194,6 +250,7 @@ function createContentCard(element) {
 
 function createContentCardWrapper(element) {
   var contentCardWrapper = createElement("div", "content-cart__wrapper");
+  contentCardWrapper.append((0, _blur_menu.createBlurElements)());
   contentCardWrapper.append(createContentCardElements(element));
   contentCardWrapper.append(createContentCardDescription(element));
   return contentCardWrapper;
@@ -286,6 +343,13 @@ function createMenuAddButton() {
 function createMenuHideButton() {
   var menuHideButton = createElement("button", "menu-content__hide");
   menuHideButton.innerText = "Скрыть пин со страницы";
+  menuHideButton.addEventListener("click", function (event) {
+    if (event.target.className === "menu-content__hide") {
+      event.target.closest(".content-cart__elements").classList.add("blur");
+      event.target.closest(".content-cart__elements").nextElementSibling.classList.add("blur");
+      event.target.closest(".content-cart__wrapper").firstElementChild.classList.add("active");
+    }
+  });
   return menuHideButton;
 }
 
@@ -311,7 +375,7 @@ function createMenuComplainButton() {
 
   return menuComplainButton;
 }
-},{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./blur_menu":"scripts/blur_menu.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -339,7 +403,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57624" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50568" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
