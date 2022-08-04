@@ -1,3 +1,4 @@
+import {createBlurElements} from "./blur_menu";
 
 export const contentSection = document.querySelector(".content")
 
@@ -15,7 +16,7 @@ async function getImg () {
     }
 }
 
-function createElement (elementTagName, elementClassName) {
+export function createElement (elementTagName, elementClassName) {
     const element = document.createElement(elementTagName);
     element.className = elementClassName;
 
@@ -32,6 +33,7 @@ function createContentCard (element) {
 
 function createContentCardWrapper(element) {
     const contentCardWrapper = createElement("div", "content-cart__wrapper")
+    contentCardWrapper.append(createBlurElements())
     contentCardWrapper.append(createContentCardElements(element))
     contentCardWrapper.append(createContentCardDescription(element))
     return contentCardWrapper
@@ -136,6 +138,14 @@ function createMenuAddButton() {
 function createMenuHideButton() {
     const menuHideButton = createElement("button", "menu-content__hide")
     menuHideButton.innerText = "Скрыть пин со страницы"
+
+    menuHideButton.addEventListener("click", (event) => {
+        if (event.target.className === "menu-content__hide") {
+            event.target.closest(".content-cart__elements").classList.add("blur")
+            event.target.closest(".content-cart__elements").nextElementSibling.classList.add("blur")
+            event.target.closest(".content-cart__wrapper").firstElementChild.classList.add("active")
+        }
+    })
 
     return menuHideButton
 }
