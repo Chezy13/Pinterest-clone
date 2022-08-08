@@ -125,30 +125,30 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.createBlurElements = createBlurElements;
 
-var _main = require("./main");
+var _content = require("./content");
 
 function createBlurElements() {
-  var blurElements = (0, _main.createElement)("div", "content-cart__blur--elements");
+  var blurElements = (0, _content.createElement)("div", "content-cart__blur--elements");
   blurElements.appendChild(createBlurDescr());
   blurElements.appendChild(createBlurButtonsWrapper());
   return blurElements;
 }
 
 function createBlurDescr() {
-  var blurDescr = (0, _main.createElement)("div", "content-cart__blur--descr");
+  var blurDescr = (0, _content.createElement)("div", "content-cart__blur--descr");
   blurDescr.innerText = "Понятно! Вы больше не увидите этот пин";
   return blurDescr;
 }
 
 function createBlurButtonsWrapper() {
-  var blurButtonsWrapper = (0, _main.createElement)("div", "content-cart__blur--buttons");
+  var blurButtonsWrapper = (0, _content.createElement)("div", "content-cart__blur--buttons");
   blurButtonsWrapper.appendChild(createBlurDeleteBtn());
   blurButtonsWrapper.appendChild(createBlurCancelBtn());
   return blurButtonsWrapper;
 }
 
 function createBlurDeleteBtn() {
-  var blurDeleteBtn = (0, _main.createElement)("div", "content-cart__blur--delete");
+  var blurDeleteBtn = (0, _content.createElement)("div", "content-cart__blur--delete");
   blurDeleteBtn.innerText = "Удалить пин";
   blurDeleteBtn.addEventListener("click", function (event) {
     if (event.target === blurDeleteBtn) {
@@ -159,7 +159,7 @@ function createBlurDeleteBtn() {
 }
 
 function createBlurCancelBtn() {
-  var blurCancelBtn = (0, _main.createElement)("div", "content-cart__blur--cancel");
+  var blurCancelBtn = (0, _content.createElement)("div", "content-cart__blur--cancel");
   blurCancelBtn.innerText = "Отмена";
   blurCancelBtn.addEventListener("click", function (event) {
     if (event.target === blurCancelBtn) {
@@ -170,13 +170,14 @@ function createBlurCancelBtn() {
   });
   return blurCancelBtn;
 }
-},{"./main":"scripts/main.js"}],"scripts/main.js":[function(require,module,exports) {
+},{"./content":"scripts/content.js"}],"scripts/content.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.contentSection = void 0;
+exports.createContentCard = createContentCard;
 exports.createElement = createElement;
 
 var _blur_menu = require("./blur_menu");
@@ -205,7 +206,7 @@ function _getImg() {
           case 0:
             _context.prev = 0;
             _context.next = 3;
-            return fetch("https://62e0272398dd9c9df60ec690.mockapi.io/usersImages");
+            return fetch("https://62e144bde8ad6b66d845e960.mockapi.io/pinterest");
 
           case 3:
             response = _context.sent;
@@ -214,24 +215,25 @@ function _getImg() {
 
           case 6:
             images = _context.sent;
+            localStorage.setItem("images", JSON.stringify(images));
             console.log(images);
             images.forEach(function (element) {
               createContentCard(element);
             });
-            _context.next = 14;
+            _context.next = 15;
             break;
 
-          case 11:
-            _context.prev = 11;
+          case 12:
+            _context.prev = 12;
             _context.t0 = _context["catch"](0);
             alert(_context.t0.name + _context.t0.message);
 
-          case 14:
+          case 15:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 11]]);
+    }, _callee, null, [[0, 12]]);
   }));
   return _getImg.apply(this, arguments);
 }
@@ -311,27 +313,32 @@ getImg();
 function createDotsMenu(element) {
   var dotsMenu = createElement("div", "menu");
   dotsMenu.setAttribute("id", "".concat(element.ID));
-  dotsMenu.appendChild(createMenuContent());
+  dotsMenu.appendChild(createMenuContent(element));
   return dotsMenu;
 }
 
-function createMenuContent() {
+function createMenuContent(element) {
   var menuContent = createElement("div", "menu-content");
-  menuContent.appendChild(createMenuAddButton());
+  menuContent.appendChild(createMenuAddButton(element));
   menuContent.appendChild(createMenuHideButton());
   menuContent.appendChild(createMenuComplainButton());
   return menuContent;
 }
 
-function createMenuAddButton() {
+function createMenuAddButton(element) {
   var board = document.querySelector(".board");
   var menuAddButton = createElement("button", "menu-content__add");
   menuAddButton.innerText = "Добавить на доску";
-
-  menuAddButton.onclick = function () {
+  menuAddButton.setAttribute("id", "".concat(element.ID));
+  menuAddButton.addEventListener("click", function (event) {
     board.style.display = "block";
-  };
-
+    var images = JSON.parse(localStorage.getItem("images"));
+    var result = images.find(function (item) {
+      return item.ID === event.target.id;
+    });
+    console.log(result);
+    localStorage.setItem("buffer", JSON.stringify(result));
+  });
   window.addEventListener("click", function (event) {
     if (event.target === board) {
       board.style.display = "none";
@@ -380,7 +387,223 @@ function createMenuComplainButton() {
 
   return menuComplainButton;
 }
-},{"./blur_menu":"scripts/blur_menu.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./blur_menu":"scripts/blur_menu.js"}],"scripts/dots_menu.js":[function(require,module,exports) {
+"use strict";
+
+var _content = require("./content");
+
+_content.contentSection.addEventListener("click", function (event) {
+  if (event.target.classList.contains("fa-solid")) {
+    event.target.parentElement.parentElement.nextElementSibling.classList.toggle("menu-active");
+  }
+});
+
+window.addEventListener("click", function (event) {
+  var target = event.target;
+  var dotsMenu = document.querySelectorAll(".menu");
+  Array.from(dotsMenu).map(function (menu) {
+    if (!target.closest('.menu-active') && !target.closest('.content-cart__dots--btn')) {
+      menu.classList.remove('menu-active');
+    }
+  });
+});
+},{"./content":"scripts/content.js"}],"scripts/drop-down menu.js":[function(require,module,exports) {
+// Выпадающий список выбора доски !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+var btnBoardList = document.querySelector(".header-board__save");
+var boardList = document.querySelector(".list");
+btnBoardList.addEventListener("click", function () {
+  boardList.classList.toggle("show");
+});
+window.addEventListener("click", function (event) {
+  if (event.target === boardList) {
+    var dropdowns = document.getElementsByClassName("list");
+    console.log(dropdowns);
+
+    for (var i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}); // Модальное окно для добавления на доску!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// const btnAddBoard = document.querySelector(".menu-content__add");
+// const board = document.querySelector(".board");
+// btnAddBoard.addEventListener("click", function(){
+//     board.style.display = "block";
+// })
+// window.addEventListener("click", function(event) {
+//     if (event.target === board) {
+//         board.style.display = "none";
+//     }
+// })
+},{}],"scripts/searcher.js":[function(require,module,exports) {
+document.querySelector("#main-search").oninput = function () {
+  var val = this.value.trim();
+  var elasticItems = document.querySelectorAll(".content-cart");
+
+  if (val != '') {
+    elasticItems.forEach(function (elem) {
+      if (elem.innerText.search(RegExp(val, "gi")) == -1) {
+        // флаги: i - С этим флагом поиск не зависит от регистра: нет разницы между A и a.
+        elem.classList.add("hide"); //  g - С этим флагом поиск ищет все совпадения, без него – только первое.
+      } else {
+        elem.classList.remove("hide");
+      }
+    });
+  } else {
+    elasticItems.forEach(function (elem) {
+      elem.classList.remove("hide");
+    });
+  }
+};
+},{}],"scripts/localStorage.js":[function(require,module,exports) {
+// // Класс для работы с локальным хранилищем
+// class LocalStorageUtil {
+//
+//     constructor() {
+//         this.keyName = 'carts'; // в классе свойства задаются в конструкторе, имя keyName(ключ)
+//     }
+// // метод позволяет получить все карточки, которые хранятся в локальном хранилище
+//     getCarts() {
+//         const cartsLocalStorage = localStorage.getItem(this.keyName);
+//         if (cartsLocalStorage !== null) {
+//             return JSON.parse(cartsLocalStorage);                       //  если есть значения то распарсим строку и переведем её в массив
+//         }
+//         return [];                                                      // иначе вернется пустой массив
+//     }
+// // метод для добавления нового значения в локальное хранилище
+//     putCarts(id) {                                              // передаем id карточки
+//         let carts = this.getCarts();                            // в переменной теперь хранится всё что находится в локальном хранилище
+//         let pushCart = false;                                   // проверка на новую карточку  - если не новая - то удалим
+//         const index = carts.indexOf(id);                        //  определяем есть ли совпадение с id
+//         if (index === -1) {                                     //  это новые данные?
+//             carts.push(id);
+//             pushCart = true;                                    // проверка на новую карточку- если новая - то добавим
+//         } else {
+//             carts.splice(index,1);                   // иначе удаляем элем если повторяется
+//         }
+//
+//         localStorage.setItem(this.keyName, JSON.stringify(carts));    // устанавливаем в локальное хранилище(1 аргумент- ключ, 2 - carts, но локальное хранилище принимает только строку, поэтому преобразуем в строку
+//         return { pushCart, carts }                                    // возвращаем 2 значения, в виде объекта, если у объекта ключ и значение совпадают, по пишем один ключ
+//     }
+// }
+//
+// const localStorageUtil = new LocalStorageUtil();         // для проверки делаем экземпляр класса
+//
+//
+//
+// // временная проверка вывода в application
+// localStorageUtil.putCarts("check3");
+//
+},{}],"scripts/board_listener.js":[function(require,module,exports) {
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+var boardMenu = document.querySelector(".board");
+boardMenu.addEventListener("click", function (event) {
+  var buffer = JSON.parse(localStorage.getItem("buffer"));
+
+  switch (event.target.id) {
+    case "btnBoard1":
+      var board1 = JSON.parse(localStorage.getItem("board1"));
+      board1 === null ? localStorage.setItem("board1", JSON.stringify([buffer])) : localStorage.setItem("board1", JSON.stringify([].concat(_toConsumableArray(board1), [buffer])));
+      break;
+
+    case "btnBoard2":
+      var board2 = JSON.parse(localStorage.getItem("board2"));
+      board2 === null ? localStorage.setItem("board2", JSON.stringify([buffer])) : localStorage.setItem("board2", JSON.stringify([].concat(_toConsumableArray(board2), [buffer])));
+      break;
+
+    case "btnBoard3":
+      var board3 = JSON.parse(localStorage.getItem("board3"));
+      board3 === null ? localStorage.setItem("board3", JSON.stringify([buffer])) : localStorage.setItem("board3", JSON.stringify([].concat(_toConsumableArray(board3), [buffer])));
+      break;
+
+    default:
+  }
+});
+},{}],"scripts/drop-down_listener.js":[function(require,module,exports) {
+"use strict";
+
+var _content = require("./content");
+
+var downMenu = document.querySelector(".list");
+downMenu.addEventListener("click", function (event) {
+  console.log(event.target);
+
+  switch (event.target.id) {
+    case "listBtn1":
+      _content.contentSection.innerHTML = "";
+      var board1 = JSON.parse(localStorage.getItem("board1"));
+      board1 === null ? _content.contentSection.innerText = "На доску ещё не добавлены пины" : board1.map(function (item) {
+        return (0, _content.createContentCard)(item);
+      });
+      break;
+
+    case "listBtn2":
+      _content.contentSection.innerHTML = "";
+      var board2 = JSON.parse(localStorage.getItem("board2"));
+      board2 === null ? _content.contentSection.innerText = "На доску ещё не добавлены пины" : board2.map(function (item) {
+        return (0, _content.createContentCard)(item);
+      });
+      break;
+
+    case "listBtn3":
+      _content.contentSection.innerHTML = "";
+      var board3 = JSON.parse(localStorage.getItem("board3"));
+      board3 === null ? _content.contentSection.innerText = "На доску ещё не добавлены пины" : board3.map(function (item) {
+        return (0, _content.createContentCard)(item);
+      });
+      break;
+
+    default:
+  }
+});
+},{"./content":"scripts/content.js"}],"scripts/logo_listener.js":[function(require,module,exports) {
+"use strict";
+
+var _content = require("./content");
+
+var headerLogo = document.querySelector(".header-logo");
+headerLogo.addEventListener("click", function (event) {
+  var images = JSON.parse(localStorage.getItem("images"));
+  _content.contentSection.innerHTML = "";
+  images.map(function (item) {
+    return (0, _content.createContentCard)(item);
+  });
+});
+},{"./content":"scripts/content.js"}],"scripts/main.js":[function(require,module,exports) {
+"use strict";
+
+require("./content");
+
+require("./dots_menu");
+
+require("./blur_menu");
+
+require("./drop-down menu");
+
+require("./searcher");
+
+require("./localStorage");
+
+require("./board_listener");
+
+require("./drop-down_listener");
+
+require("./logo_listener");
+},{"./content":"scripts/content.js","./dots_menu":"scripts/dots_menu.js","./blur_menu":"scripts/blur_menu.js","./drop-down menu":"scripts/drop-down menu.js","./searcher":"scripts/searcher.js","./localStorage":"scripts/localStorage.js","./board_listener":"scripts/board_listener.js","./drop-down_listener":"scripts/drop-down_listener.js","./logo_listener":"scripts/logo_listener.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -408,7 +631,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55652" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56710" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
