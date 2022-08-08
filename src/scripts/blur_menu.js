@@ -1,4 +1,4 @@
-import {createElement} from "./main";
+import {createElement} from "./content";
 
 export function createBlurElements () {
     const blurElements = createElement("div", "content-cart__blur--elements");

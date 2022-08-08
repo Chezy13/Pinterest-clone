@@ -1,7 +1,7 @@
-import {contentSection} from "./main";
+import {contentSection} from "./content";
 
 contentSection.addEventListener("click", (event) => {
-        if (event.target.classList.contains("fa-solid")) {
+    if (event.target.classList.contains("fa-solid")) {
         event.target.parentElement.parentElement.nextElementSibling.classList.toggle("menu-active")
     }
 })
@@ -14,6 +14,6 @@ window.addEventListener("click", (event) => {
         if (!target.closest('.menu-active') && !target.closest('.content-cart__dots--btn')) {
             menu.classList.remove('menu-active')
         }
-    })  
+    })
 })
 

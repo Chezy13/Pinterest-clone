@@ -13,16 +13,16 @@
 
 <header class="header">
     <div class="header-logo">
-        <a href="#"><img src="img/pinterest-logo.svg" alt="logo"></a>
+        <a href="#"><img src="img/pinterest-logo.svg" id="headerLogo" alt="logo"></a>
     </div>
     <div class="header-search">
         <input class="header-search__text" id="main-search" type="text" placeholder="Поиск...">
     </div>
     <div class="header-board">
-        <button  class="header-board__save" id="main-dropDownList">Выбрать доску 
+        <button  class="header-board__save" id="main-dropDownList">Выбрать доску
             <img  class="header-board__arrow" src="img/header-menu-arrow2.svg" alt="arrow">
         </button>
-        
+
     </div>
 </header>
 
@@ -34,15 +34,15 @@
         <div class="board-content__btn">
             <div class="container">
                 <p class="board-content__btnText">Доска 1</p>
-                <button class="board-content__btn1 btnBoard">Сохранить</button>
+                <button class="board-content__btn1 btnBoard" id="btnBoard1">Сохранить</button>
             </div>
             <div class="container">
                 <p class="board-content__btnText">Доска 2</p>
-                <button class="board-content__btn2 btnBoard">Сохранить</button>
+                <button class="board-content__btn2 btnBoard" id="btnBoard2">Сохранить</button>
             </div>
             <div class="container">
                 <p class="board-content__btnText">Доска 3</p>
-                <button class="board-content__btn3 btnBoard">Сохранить</button>
+                <button class="board-content__btn3 btnBoard" id="btnBoard3">Сохранить</button>
             </div>
         </div>
     </div>
@@ -52,9 +52,9 @@
     <div class="list-content">
         <p class="list-content__text">Выбрать доску</p>
         <div class="list-content__btn">
-            <button class="board-content__btn1 btnBoard">Доска 1</button>
-            <button class="board-content__btn2 btnBoard">Доска 2</button>
-            <button class="board-content__btn3 btnBoard">Доска 3</button>
+            <button class="board-content__btn1 btnBoard" id="listBtn1">Доска 1</button>
+            <button class="board-content__btn2 btnBoard" id="listBtn2">Доска 2</button>
+            <button class="board-content__btn3 btnBoard" id="listBtn3">Доска 3</button>
         </div>
     </div>
 </div>
@@ -110,11 +110,8 @@
 
 </div>
 
-<script src="scripts/main.js"></script>
-<script src="./scripts/dots_menu.js"></script>
-<script src="./scripts/drop-down menu.js"></script>
-<script src="./scripts/searcher.js"></script>
-<script src="./scripts/localStorage.js"></script>
+<script src="./scripts/main.js"></script>
+
 <script src="https://kit.fontawesome.com/be739139b5.js" crossorigin="anonymous"></script>
 </body>
 </html>
