@@ -127,6 +127,8 @@ exports.createBlurElements = createBlurElements;
 
 var _content = require("./content");
 
+// Создание структуры меню с кнопками "Удалить пин" и "Отмена", появляющегося
+// при клике на кнопку "Cкрыть пин со страницы"
 function createBlurElements() {
   var blurElements = (0, _content.createElement)("div", "content-cart__blur--elements");
   blurElements.appendChild(createBlurDescr());
@@ -149,7 +151,9 @@ function createBlurButtonsWrapper() {
 
 function createBlurDeleteBtn() {
   var blurDeleteBtn = (0, _content.createElement)("div", "content-cart__blur--delete");
-  blurDeleteBtn.innerText = "Удалить пин";
+  blurDeleteBtn.innerText = "Удалить пин"; // Обработчик события при клике на кнопку "Удалить пин". Если целью является указанная кнопка, скрывается
+  // ближайший родительский элемент, соответствующий классу .content-cart
+
   blurDeleteBtn.addEventListener("click", function (event) {
     if (event.target === blurDeleteBtn) {
       event.target.closest(".content-cart").style.display = "none";
@@ -160,7 +164,9 @@ function createBlurDeleteBtn() {
 
 function createBlurCancelBtn() {
   var blurCancelBtn = (0, _content.createElement)("div", "content-cart__blur--cancel");
-  blurCancelBtn.innerText = "Отмена";
+  blurCancelBtn.innerText = "Отмена"; // Обработчик события при клике на кнопку "Отмена". Если целью является указанная кнопка, с пина отменяется
+  // эффект замыливания с удалением соответствующих классов с элементов карточки
+
   blurCancelBtn.addEventListener("click", function (event) {
     if (event.target === blurCancelBtn) {
       event.target.closest(".content-cart__blur--elements").nextElementSibling.classList.remove("blur");
@@ -190,12 +196,14 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-var contentSection = document.querySelector(".content");
+var contentSection = document.querySelector(".content"); // Асинхронная функция для получения массива данных из mockAPI (картинок, аватаров, ID, описаний)
+
 exports.contentSection = contentSection;
 
 function getImg() {
   return _getImg.apply(this, arguments);
-}
+} // Функция для создания элементов с возможностью задать тэг и класс элементу
+
 
 function _getImg() {
   _getImg = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -215,8 +223,11 @@ function _getImg() {
 
           case 6:
             images = _context.sent;
-            localStorage.setItem("images", JSON.stringify(images));
-            console.log(images);
+            localStorage.setItem("images", JSON.stringify(images)); // Сохранение массива карточек-пинов в localstorage
+
+            console.log(images); // Отрисовка созданных карточек-пинов и с помощью метода forEach передача объекта массива в функцию,
+            // которая создаёт карточки-пины
+
             images.forEach(function (element) {
               createContentCard(element);
             });
@@ -242,7 +253,8 @@ function createElement(elementTagName, elementClassName) {
   var element = document.createElement(elementTagName);
   element.className = elementClassName;
   return element;
-}
+} // Создание структуры карточки-пина с добавлением в секцию "content"
+
 
 function createContentCard(element) {
   var contentCard = createElement("div", "content-cart");
@@ -271,7 +283,8 @@ function createContentCardDescription(element) {
   contentCardDescription.append(createAvatar(element));
   contentCardDescription.append(createDescripton(element));
   return contentCardDescription;
-}
+} // Создание картинки через функцию-конструктор в карточке-пине и получение картинки из mockAPI c помощью метода src
+
 
 function createImg(element) {
   var image = new Image();
@@ -293,22 +306,23 @@ function createCardDotsBtn(element) {
   cardDotsBtnInner.setAttribute("id", "".concat(element.ID));
   cardDotsBtn.appendChild(cardDotsBtnInner);
   return cardDotsBtn;
-}
+} // Создание аватара через функцию-конструктор в карточке-пине и получение аватара из mockAPI c помощью метода src
+
 
 function createAvatar(element) {
   var avatar = new Image();
   avatar.src = element.name;
   avatar.className = "content-cart__author-img";
   return avatar;
-}
+} // Создание описания к картинке и получение описания из mockAPI
+
 
 function createDescripton(element) {
   var descr = createElement("p", "content-cart__text");
   descr.innerText = element.description;
   return descr;
-}
+} // Создание структуры меню, отображающегося при клике на кнопку с тремя точками
 
-getImg();
 
 function createDotsMenu(element) {
   var dotsMenu = createElement("div", "menu");
@@ -328,10 +342,13 @@ function createMenuContent(element) {
 function createMenuAddButton(element) {
   var board = document.querySelector(".board");
   var menuAddButton = createElement("button", "menu-content__add");
-  menuAddButton.innerText = "Добавить на доску";
+  menuAddButton.innerText = "Добавить на доску"; // Добавление аттрибута ID к кнопке "Добавить на доску"
+
   menuAddButton.setAttribute("id", "".concat(element.ID));
   menuAddButton.addEventListener("click", function (event) {
-    board.style.display = "block";
+    board.style.display = "block"; // Получение объекта карточки-пина по ID из localstorage и сохранение объекта в localstorage
+    // с ключом buffer для последующего сохранения на одну из досок
+
     var images = JSON.parse(localStorage.getItem("images"));
     var result = images.find(function (item) {
       return item.ID === event.target.id;
@@ -349,7 +366,10 @@ function createMenuAddButton(element) {
 
 function createMenuHideButton() {
   var menuHideButton = createElement("button", "menu-content__hide");
-  menuHideButton.innerText = "Скрыть пин со страницы";
+  menuHideButton.innerText = "Скрыть пин со страницы"; // Обработчик события при клике на кнопку "Скрыть пин со страницы". Появляется эффект замыливания
+  // на карточке-пине и отображается меню с кнопками "Удалить пин" и "Отмена" с добавлением
+  // соответствующих классов элементам
+
   menuHideButton.addEventListener("click", function (event) {
     if (event.target.className === "menu-content__hide") {
       event.target.closest(".content-cart__elements").classList.add("blur");
@@ -387,7 +407,9 @@ function createMenuComplainButton() {
 
   return menuComplainButton;
 }
-},{"./blur_menu":"scripts/blur_menu.js"}],"scripts/dots_menu.js":[function(require,module,exports) {
+
+getImg();
+},{"./blur_menu":"scripts/blur_menu.js"}],"scripts/dots-menu_listener.js":[function(require,module,exports) {
 "use strict";
 
 var _content = require("./content");
@@ -510,7 +532,10 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-var boardMenu = document.querySelector(".board");
+var boardMenu = document.querySelector(".board"); // Добавление объекта из буфера на одну из трех досок, в зависимости от того, какая из кнопок была нажата
+// (кнопки различаются по ID). Если массив с доской пуст (=== null), то проиходит сохранение объекта из буфера
+// в localstorage, в ином случае происходит сохранение объекта из буфера в массив с доской и в localstorage
+
 boardMenu.addEventListener("click", function (event) {
   var buffer = JSON.parse(localStorage.getItem("buffer"));
 
@@ -538,8 +563,11 @@ boardMenu.addEventListener("click", function (event) {
 
 var _content = require("./content");
 
-var downMenu = document.querySelector(".list");
-downMenu.addEventListener("click", function (event) {
+var dropDownMenu = document.querySelector(".list"); // Отрисовка картинок-пинов в зависимости от клика на одну из досок (различаются по ID).
+// Происходит очистка всего контента. В случае если доска пуста происходит добавление
+// текста "На доску ещё не добавлены пины".
+
+dropDownMenu.addEventListener("click", function (event) {
   console.log(event.target);
 
   switch (event.target.id) {
@@ -575,7 +603,9 @@ downMenu.addEventListener("click", function (event) {
 
 var _content = require("./content");
 
-var headerLogo = document.querySelector(".header-logo");
+var headerLogo = document.querySelector(".header-logo"); // При клике на лого получаем массив с карточками-пинами, очищаем контент и заново отрисовываем все карточки,
+// для того, чтобы вернуться из доски к изначальному контенту
+
 headerLogo.addEventListener("click", function (event) {
   var images = JSON.parse(localStorage.getItem("images"));
   _content.contentSection.innerHTML = "";
@@ -588,7 +618,7 @@ headerLogo.addEventListener("click", function (event) {
 
 require("./content");
 
-require("./dots_menu");
+require("./dots-menu_listener");
 
 require("./blur_menu");
 
@@ -603,7 +633,7 @@ require("./board_listener");
 require("./drop-down_listener");
 
 require("./logo_listener");
-},{"./content":"scripts/content.js","./dots_menu":"scripts/dots_menu.js","./blur_menu":"scripts/blur_menu.js","./drop-down menu":"scripts/drop-down menu.js","./searcher":"scripts/searcher.js","./localStorage":"scripts/localStorage.js","./board_listener":"scripts/board_listener.js","./drop-down_listener":"scripts/drop-down_listener.js","./logo_listener":"scripts/logo_listener.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./content":"scripts/content.js","./dots-menu_listener":"scripts/dots-menu_listener.js","./blur_menu":"scripts/blur_menu.js","./drop-down menu":"scripts/drop-down menu.js","./searcher":"scripts/searcher.js","./localStorage":"scripts/localStorage.js","./board_listener":"scripts/board_listener.js","./drop-down_listener":"scripts/drop-down_listener.js","./logo_listener":"scripts/logo_listener.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
