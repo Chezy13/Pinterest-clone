@@ -1,9 +1,12 @@
 import {createContentCard} from "./content";
 import {contentSection} from "./content";
 
-const downMenu = document.querySelector(".list");
+const dropDownMenu = document.querySelector(".list");
 
-downMenu.addEventListener("click", (event) => {
+// Отрисовка картинок-пинов в зависимости от клика на одну из досок (различаются по ID).
+// Происходит очистка всего контента. В случае если доска пуста происходит добавление
+// текста "На доску ещё не добавлены пины".
+dropDownMenu.addEventListener("click", (event) => {
     console.log(event.target)
     switch (event.target.id) {
         case "listBtn1":

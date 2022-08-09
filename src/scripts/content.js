@@ -2,12 +2,15 @@ import {createBlurElements} from "./blur_menu";
 
 export const contentSection = document.querySelector(".content")
 
+// Асинхронная функция для получения массива данных из mockAPI (картинок, аватаров, ID, описаний)
 async function getImg () {
     try {
         const response = await fetch("https://62e144bde8ad6b66d845e960.mockapi.io/pinterest");
         const images = await response.json()
-        localStorage.setItem("images", JSON.stringify(images))
+        localStorage.setItem("images", JSON.stringify(images)) // Сохранение массива карточек-пинов в localstorage
         console.log(images);
+        // Отрисовка созданных карточек-пинов и с помощью метода forEach передача объекта массива в функцию,
+        // которая создаёт карточки-пины
         images.forEach(element => {
             createContentCard(element)
         })
@@ -17,7 +20,7 @@ async function getImg () {
     }
 }
 
-
+// Функция для создания элементов с возможностью задать тэг и класс элементу
 export function createElement (elementTagName, elementClassName) {
     const element = document.createElement(elementTagName);
     element.className = elementClassName;
@@ -25,6 +28,7 @@ export function createElement (elementTagName, elementClassName) {
     return element;
 }
 
+// Создание структуры карточки-пина с добавлением в секцию "content"
 export function createContentCard (element) {
     const contentCard = createElement("div", "content-cart")
     contentCard.append(createContentCardWrapper(element))
@@ -59,6 +63,7 @@ function createContentCardDescription(element) {
     return contentCardDescription;
 }
 
+// Создание картинки через функцию-конструктор в карточке-пине и получение картинки из mockAPI c помощью метода src
 function createImg (element) {
     const image = new Image();
     image.src= element.image;
@@ -84,6 +89,7 @@ function createCardDotsBtn(element) {
     return cardDotsBtn
 }
 
+// Создание аватара через функцию-конструктор в карточке-пине и получение аватара из mockAPI c помощью метода src
 function createAvatar (element) {
     const avatar = new Image();
     avatar.src = element.name;
@@ -92,6 +98,7 @@ function createAvatar (element) {
     return avatar;
 }
 
+// Создание описания к картинке и получение описания из mockAPI
 function createDescripton(element) {
     const descr = createElement("p", "content-cart__text");
     descr.innerText = element.description
@@ -99,8 +106,7 @@ function createDescripton(element) {
     return descr;
 }
 
-getImg()
-
+// Создание структуры меню, отображающегося при клике на кнопку с тремя точками
 function createDotsMenu(element) {
     const dotsMenu = createElement("div", "menu")
     dotsMenu.setAttribute("id", `${element.ID}`)
@@ -123,10 +129,13 @@ function createMenuAddButton(element) {
 
     const menuAddButton = createElement("button", "menu-content__add")
     menuAddButton.innerText = "Добавить на доску"
+    // Добавление аттрибута ID к кнопке "Добавить на доску"
     menuAddButton.setAttribute("id", `${element.ID}`)
 
     menuAddButton.addEventListener("click", (event) => {
         board.style.display = "block";
+        // Получение объекта карточки-пина по ID из localstorage и сохранение объекта в localstorage
+        // с ключом buffer для последующего сохранения на одну из досок
         const images = JSON.parse(localStorage.getItem("images"))
         const result = images.find(item => item.ID === event.target.id)
         console.log(result)
@@ -146,7 +155,9 @@ function createMenuAddButton(element) {
 function createMenuHideButton() {
     const menuHideButton = createElement("button", "menu-content__hide")
     menuHideButton.innerText = "Скрыть пин со страницы"
-
+    // Обработчик события при клике на кнопку "Скрыть пин со страницы". Появляется эффект замыливания
+    // на карточке-пине и отображается меню с кнопками "Удалить пин" и "Отмена" с добавлением
+    // соответствующих классов элементам
     menuHideButton.addEventListener("click", (event) => {
         if (event.target.className === "menu-content__hide") {
             event.target.closest(".content-cart__elements").classList.add("blur")
@@ -186,7 +197,7 @@ function createMenuComplainButton() {
     return menuComplainButton
 }
 
-
+getImg()
 
 
 
