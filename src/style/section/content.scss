@@ -10,10 +10,8 @@
   display: grid;
   justify-items: center;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  // grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
 
   &-cart {
-    // width: 300px;
     margin: 10px;
 
     &__wrapper {
@@ -57,9 +55,6 @@
     }
 
     &__elements {
-      // width: 100%;
-      // height: 100%;
-      // border-radius: 10px;
       position: relative;
     }
 

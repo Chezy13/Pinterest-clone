@@ -7,7 +7,7 @@ const dropDownMenu = document.querySelector(".list");
 // Происходит очистка всего контента. В случае если доска пуста происходит добавление
 // текста "На доску ещё не добавлены пины".
 dropDownMenu.addEventListener("click", (event) => {
-    console.log(event.target)
+    // console.log(event.target)
     switch (event.target.id) {
         case "listBtn1":
             contentSection.innerHTML = ""

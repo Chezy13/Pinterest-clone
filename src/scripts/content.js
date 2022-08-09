@@ -33,8 +33,6 @@ export function createContentCard (element) {
     const contentCard = createElement("div", "content-cart")
     contentCard.append(createContentCardWrapper(element))
     contentSection.append(contentCard)
-
-    // return contentCard
 }
 
 function createContentCardWrapper(element) {

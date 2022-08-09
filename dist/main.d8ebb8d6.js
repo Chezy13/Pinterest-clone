@@ -159,6 +159,8 @@ function createBlurDeleteBtn() {
       event.target.closest(".content-cart").style.display = "none";
     }
   });
+  var response = fetch("https://62e144bde8ad6b66d845e960.mockapi.io/pinterest");
+  console.log(response);
   return blurDeleteBtn;
 }
 
@@ -259,7 +261,7 @@ function createElement(elementTagName, elementClassName) {
 function createContentCard(element) {
   var contentCard = createElement("div", "content-cart");
   contentCard.append(createContentCardWrapper(element));
-  contentSection.append(contentCard); // return contentCard
+  contentSection.append(contentCard);
 }
 
 function createContentCardWrapper(element) {
@@ -491,45 +493,6 @@ document.querySelector("#main-search").oninput = function () {
     });
   }
 };
-},{}],"scripts/localStorage.js":[function(require,module,exports) {
-// // Класс для работы с локальным хранилищем
-// class LocalStorageUtil {
-//
-//     constructor() {
-//         this.keyName = 'carts'; // в классе свойства задаются в конструкторе, имя keyName(ключ)
-//     }
-// // метод позволяет получить все карточки, которые хранятся в локальном хранилище
-//     getCarts() {
-//         const cartsLocalStorage = localStorage.getItem(this.keyName);
-//         if (cartsLocalStorage !== null) {
-//             return JSON.parse(cartsLocalStorage);                       //  если есть значения то распарсим строку и переведем её в массив
-//         }
-//         return [];                                                      // иначе вернется пустой массив
-//     }
-// // метод для добавления нового значения в локальное хранилище
-//     putCarts(id) {                                              // передаем id карточки
-//         let carts = this.getCarts();                            // в переменной теперь хранится всё что находится в локальном хранилище
-//         let pushCart = false;                                   // проверка на новую карточку  - если не новая - то удалим
-//         const index = carts.indexOf(id);                        //  определяем есть ли совпадение с id
-//         if (index === -1) {                                     //  это новые данные?
-//             carts.push(id);
-//             pushCart = true;                                    // проверка на новую карточку- если новая - то добавим
-//         } else {
-//             carts.splice(index,1);                   // иначе удаляем элем если повторяется
-//         }
-//
-//         localStorage.setItem(this.keyName, JSON.stringify(carts));    // устанавливаем в локальное хранилище(1 аргумент- ключ, 2 - carts, но локальное хранилище принимает только строку, поэтому преобразуем в строку
-//         return { pushCart, carts }                                    // возвращаем 2 значения, в виде объекта, если у объекта ключ и значение совпадают, по пишем один ключ
-//     }
-// }
-//
-// const localStorageUtil = new LocalStorageUtil();         // для проверки делаем экземпляр класса
-//
-//
-//
-// // временная проверка вывода в application
-// localStorageUtil.putCarts("check3");
-//
 },{}],"scripts/board_listener.js":[function(require,module,exports) {
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -579,8 +542,7 @@ var dropDownMenu = document.querySelector(".list"); // Отрисовка кар
 // текста "На доску ещё не добавлены пины".
 
 dropDownMenu.addEventListener("click", function (event) {
-  console.log(event.target);
-
+  // console.log(event.target)
   switch (event.target.id) {
     case "listBtn1":
       _content.contentSection.innerHTML = "";
@@ -637,18 +599,12 @@ require("./drop-down menu");
 
 require("./searcher");
 
-require("./localStorage");
-
 require("./board_listener");
 
 require("./drop-down_listener");
 
 require("./logo_listener");
-<<<<<<< HEAD
-},{"./content":"scripts/content.js","./dots_menu":"scripts/dots_menu.js","./blur_menu":"scripts/blur_menu.js","./drop-down menu":"scripts/drop-down menu.js","./searcher":"scripts/searcher.js","./localStorage":"scripts/localStorage.js","./board_listener":"scripts/board_listener.js","./drop-down_listener":"scripts/drop-down_listener.js","./logo_listener":"scripts/logo_listener.js"}],"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
-=======
-},{"./content":"scripts/content.js","./dots-menu_listener":"scripts/dots-menu_listener.js","./blur_menu":"scripts/blur_menu.js","./drop-down menu":"scripts/drop-down menu.js","./searcher":"scripts/searcher.js","./localStorage":"scripts/localStorage.js","./board_listener":"scripts/board_listener.js","./drop-down_listener":"scripts/drop-down_listener.js","./logo_listener":"scripts/logo_listener.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
->>>>>>> 90f08627dddd44aabf4b00b906665d405904dd1e
+},{"./content":"scripts/content.js","./dots-menu_listener":"scripts/dots-menu_listener.js","./blur_menu":"scripts/blur_menu.js","./drop-down menu":"scripts/drop-down menu.js","./searcher":"scripts/searcher.js","./board_listener":"scripts/board_listener.js","./drop-down_listener":"scripts/drop-down_listener.js","./logo_listener":"scripts/logo_listener.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -676,11 +632,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-<<<<<<< HEAD
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61834" + '/');
-=======
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52429" + '/');
->>>>>>> 90f08627dddd44aabf4b00b906665d405904dd1e
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64690" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -856,5 +808,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","scripts/main.js"], null)
+},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","scripts/main.js"], null)
 //# sourceMappingURL=/main.d8ebb8d6.js.map

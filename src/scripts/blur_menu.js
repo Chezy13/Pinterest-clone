@@ -35,7 +35,8 @@ function createBlurDeleteBtn() {
             event.target.closest(".content-cart").style.display = "none"
         }
     })
-
+    const response = fetch("https://62e144bde8ad6b66d845e960.mockapi.io/pinterest");
+    console.log(response);
     return blurDeleteBtn
 }
 
