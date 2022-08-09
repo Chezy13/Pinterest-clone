@@ -2,7 +2,6 @@ const boardMenu = document.querySelector(".board")
 
 boardMenu.addEventListener("click", (event) => {
     const buffer = JSON.parse(localStorage.getItem("buffer"))
-
     switch (event.target.id) {
         case "btnBoard1":
             const board1 = JSON.parse(localStorage.getItem("board1"))
@@ -22,3 +21,7 @@ boardMenu.addEventListener("click", (event) => {
         default:
     }
 })
+
+
+
+

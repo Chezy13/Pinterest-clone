@@ -410,42 +410,51 @@ window.addEventListener("click", function (event) {
 },{"./content":"scripts/content.js"}],"scripts/drop-down menu.js":[function(require,module,exports) {
 // Выпадающий список выбора доски !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 var btnBoardList = document.querySelector(".header-board__save");
-var boardList = document.querySelector(".list");
+var boardList = document.querySelector(".list"); // слушатель события на кнопку btnBoardList
+// при клике на кнопку добавляется класс "show", и показывается список
+
 btnBoardList.addEventListener("click", function () {
-  boardList.classList.toggle("show");
-});
+  boardList.classList.toggle("show"); //  c помощью toggle чередуются классы (добавляютя и удаляются)
+
+  closeModalWindow(); // вызов функции для закрытия окна со списками досок
+}); // если пользователь кликнул вне списка, то список закрывается
+
 window.addEventListener("click", function (event) {
   if (event.target === boardList) {
     var dropdowns = document.getElementsByClassName("list");
-    console.log(dropdowns);
 
     for (var i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
+      var openDropdown = dropdowns[i]; // проверка: если класс 'show' присутствует, то класс удаляется и список закрывается
 
       if (openDropdown.classList.contains('show')) {
         openDropdown.classList.remove('show');
       }
     }
   }
-}); // Модальное окно для добавления на доску!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// const btnAddBoard = document.querySelector(".menu-content__add");
-// const board = document.querySelector(".board");
-// btnAddBoard.addEventListener("click", function(){
-//     board.style.display = "block";
-// })
-// window.addEventListener("click", function(event) {
-//     if (event.target === board) {
-//         board.style.display = "none";
-//     }
-// })
+});
+var btnBoard1 = document.querySelector("#listBtn1");
+var btnBoard2 = document.querySelector("#listBtn2");
+var btnBoard3 = document.querySelector("#listBtn3"); // функция для закрытия окна со списками досок при нажатии на одну из досок
+
+function closeModalWindow() {
+  btnBoard1.addEventListener("click", function () {
+    boardList.classList.remove("show");
+  });
+  btnBoard2.addEventListener("click", function () {
+    boardList.classList.remove("show");
+  });
+  btnBoard3.addEventListener("click", function () {
+    boardList.classList.remove("show");
+  });
+}
 },{}],"scripts/searcher.js":[function(require,module,exports) {
 document.querySelector("#main-search").oninput = function () {
   var val = this.value.trim();
   var elasticItems = document.querySelectorAll(".content-cart");
 
-  if (val != '') {
+  if (val !== '') {
     elasticItems.forEach(function (elem) {
-      if (elem.innerText.search(RegExp(val, "gi")) == -1) {
+      if (elem.innerText.search(RegExp(val, "gi")) === -1) {
         // флаги: i - С этим флагом поиск не зависит от регистра: нет разницы между A и a.
         elem.classList.add("hide"); //  g - С этим флагом поиск ищет все совпадения, без него – только первое.
       } else {
@@ -631,7 +640,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56710" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57218" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
