@@ -1,7 +1,11 @@
 const boardMenu = document.querySelector(".board")
 
+// Добавление объекта из буфера на одну из трех досок, в зависимости от того, какая из кнопок была нажата
+// (кнопки различаются по ID). Если массив с доской пуст (=== null), то проиходит сохранение объекта из буфера
+// в localstorage, в ином случае происходит сохранение объекта из буфера в массив с доской и в localstorage
 boardMenu.addEventListener("click", (event) => {
     const buffer = JSON.parse(localStorage.getItem("buffer"))
+
     switch (event.target.id) {
         case "btnBoard1":
             const board1 = JSON.parse(localStorage.getItem("board1"))
@@ -21,7 +25,3 @@ boardMenu.addEventListener("click", (event) => {
         default:
     }
 })
-
-
-
-
