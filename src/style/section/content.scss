@@ -137,3 +137,9 @@
   filter: blur(4px);
   color: #a5a5a5;
 }
+
+.content {
+  margin: 20px;
+  text-align: center;
+  @include font;
+}

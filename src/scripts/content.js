@@ -185,9 +185,3 @@ function createMenuComplainButton() {
     }
     return menuComplainButton
 }
-
-
-
-
-
-
