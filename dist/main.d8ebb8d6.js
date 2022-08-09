@@ -603,7 +603,7 @@ require("./board_listener");
 require("./drop-down_listener");
 
 require("./logo_listener");
-},{"./content":"scripts/content.js","./dots_menu":"scripts/dots_menu.js","./blur_menu":"scripts/blur_menu.js","./drop-down menu":"scripts/drop-down menu.js","./searcher":"scripts/searcher.js","./localStorage":"scripts/localStorage.js","./board_listener":"scripts/board_listener.js","./drop-down_listener":"scripts/drop-down_listener.js","./logo_listener":"scripts/logo_listener.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./content":"scripts/content.js","./dots_menu":"scripts/dots_menu.js","./blur_menu":"scripts/blur_menu.js","./drop-down menu":"scripts/drop-down menu.js","./searcher":"scripts/searcher.js","./localStorage":"scripts/localStorage.js","./board_listener":"scripts/board_listener.js","./drop-down_listener":"scripts/drop-down_listener.js","./logo_listener":"scripts/logo_listener.js"}],"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -631,7 +631,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56710" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61834" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -807,5 +807,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","scripts/main.js"], null)
+},{}]},{},["../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","scripts/main.js"], null)
 //# sourceMappingURL=/main.d8ebb8d6.js.map

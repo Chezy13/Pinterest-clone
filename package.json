@@ -19,6 +19,6 @@
   "homepage": "https://github.com/Chezy13/Pinterest-clone#readme",
   "devDependencies": {
     "parcel-bundler": "^1.12.5",
-    "sass": "^1.54.0"
+    "sass": "^1.54.3"
   }
 }
